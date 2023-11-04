@@ -8,23 +8,33 @@
     <div class="col mb-3">
       <label for="firstname" class="form-label">First Name</label>
       <input type="text" class="form-control" id="firstname" formControlName="firstname">
+      <div class="form-text text-danger" *ngIf="firstname.errors?.['required'] && firstname.touched">First Name Is
+        Required</div>
     </div>
     <div class="col mb-3">
       <label for="lastname" class="form-label">Last Name</label>
       <input type="text" class="form-control" id="lastname" formControlName="lastname">
+      <div class="form-text text-danger" *ngIf="lastname.errors?.['required'] && firstname.touched">Last Name Is
+        Required</div>
     </div>
   </div>
   <div class="row">
     <div class="col mb-3">
       <label for="email" class="form-label">Email Address</label>
       <input type="text" class="form-control" id="email" formControlName="email">
+      <div class="form-text text-danger" *ngIf="email.errors?.['email'] && email.touched">Enter valid Email Id</div>
+      <div class="form-text text-danger" *ngIf="email.errors?.['required'] && (email.touched || email.dirty)">Email Id
+        is required</div>
     </div>
   </div>
   <div class="row">
     <div class="col mb-3">
       <label for="mobile" class="form-label">Mobile Number</label>
       <input type="text" class="form-control" id="mobile" formControlName="mobilenumber">
-      <div class="form text"></div>
+      <div class="form-text text-danger"
+        *ngIf="mobilenumber.errors?.['pattern'] && (mobilenumber.touched || mobilenumber.dirty)">Mobile Number is
+        Invalid
+      </div>
     </div>
     <div class="col ps-3 mb-3">
       <div class="m-1">Gender</div>
@@ -36,13 +46,25 @@
         <input type="radio" class="form-check-input" value="f" id="female" formControlName="gender">
         <label class="form-check-label" for="female">Female</label>
       </div>
-    </div>
 
+      <div class="form-text text-danger" *ngIf="gender.errors?.['required'] && (gender.touched || gender.dirty)">Gender
+        is required
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col mb-3">
       <label for="pwd" class="form-label">Password</label>
       <input type="password" class="form-control" id="pwd" formControlName="password">
+
+      <div class="form-text text-danger" *ngIf="password.errors?.['required'] && (password.touched || password.dirty)">
+        Password is required
+      </div>
+      <div class="form-text text-danger"
+        *ngIf="password.errors?.['minlength'] ||password.errors?.['maxlength'] && (password.touched || password.dirty)">
+        Password should be alteast 6 to 12 character.
+      </div>
+
     </div>
     <div class="col mb-3">
       <label for="cnfpwd" class="form-label">Confirm Password</label>
@@ -52,7 +74,7 @@
   <div class="row">
     <div class="col-6 offset-3">
       <div class="d-grid">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" [disabled]="registerform.invalid">Submit</button>
       </div>
     </div>
   </div>
